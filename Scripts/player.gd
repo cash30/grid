@@ -1,44 +1,38 @@
 extends CharacterBody2D
+var moveDirection = Vector2(0, 0)
 
 
-var isOnTilex : bool = int(position.x) % 10 != 0
-var isOnTiley : bool = int(position.y) % 10 != 0
-var shouldGoUp : bool = int(position.x) % 10 > 5
-var shouldGoDown : bool = int(position.x) % 10 < 5
 
 
-@export var speed : int = 100.0
+#@export var speed : int = 1.0
 
 func _ready() -> void:
-	pass
+	moveDirection = Main.mmoveDirection
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
+	moveDirection = Main.mmoveDirection
 	moveSnake()
-	
-	
-	
-	
-	move_and_slide()
+	#move_and_slide()
 	
 func moveSnake():
 	if Main.canMove:
 		
-		if Input.is_action_pressed("up") and !Input.is_action_pressed("down"):
+		if Input.is_action_pressed("up") and Main.mmoveDirection != Main.down:
 			Main.mmoveDirection = Main.up
 			Main.canMove = false
 			if !Main.gameStarted:
 				startGame()
-		if Input.is_action_pressed("down") and !Input.is_action_pressed("up"):
+		if Input.is_action_pressed("down") and Main.mmoveDirection != Main.up:
 			Main.mmoveDirection = Main.down
 			Main.canMove = false
 			if !Main.gameStarted:
 				startGame()
-		if Input.is_action_pressed("left") and !Input.is_action_pressed("right"):
+		if Input.is_action_pressed("left") and Main.mmoveDirection != Main.right:
 			Main.mmoveDirection = Main.left
 			Main.canMove = false
 			if !Main.gameStarted:
 				startGame()
-		if Input.is_action_pressed("right") and !Input.is_action_pressed("left"):
+		if Input.is_action_pressed("right") and Main.mmoveDirection != Main.left:
 			Main.mmoveDirection = Main.right
 			Main.canMove = false
 			if !Main.gameStarted:
@@ -51,17 +45,14 @@ func startGame():
 
 
 func _on_timer_timeout() -> void:
-	pass # Replace with function body.
-
-
-
-	#isOnTilex = int(position.x) % 10 == 0
-	#isOnTiley = int(position.y) % 10 == 0
-	#print(int(position.y) % 10)
-		#
-	#if !isOnTilex and !isOnTiley:
-		#if shouldGoUp:
-			#position.x -= 1
-		#elif shouldGoDown:
-			#position.x += 1
-		#position.y += 1
+	Main.canMove = true
+	Main.oldData = [] + Main.snakeData
+	Main.snakeData[0] += moveDirection
+	for i in range(len(Main.snakeData)):
+		#move all the segments along by one
+		if i > 0:
+			Main.snakeData[i] = Main.oldData[i - 1]
+		Main.snake[i].position = (Main.snakeData[i] * Main.cellSize) + Vector2(0, Main.cellSize)
+	Main.checkOutIfHitWall()
+	Main.checkIfAppleEaton()
+	Main.checkIfSelfCollide()

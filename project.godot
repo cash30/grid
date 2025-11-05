@@ -13,11 +13,16 @@ config_version=5
 config/name="grid"
 run/main_scene="uid://dtlojkddgo42w"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+run/max_fps=60
 config/icon="res://Art/icon.svg"
 
 [autoload]
 
 Main="*res://Scripts/main.gd"
+
+[display]
+
+window/stretch/mode="viewport"
 
 [editor_plugins]
 
