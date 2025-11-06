@@ -7,6 +7,6 @@
 #credits
 	I followed this tutorial: youtu.be/DlRP-UBR-2A
 	
-	all of the art was by me :D
+	Art by Azariah Crum + me :D
 	
 	

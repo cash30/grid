@@ -17,6 +17,9 @@ var gameStarted = false
 var cells = 32
 var cellSize = 10
 
+var applePos = Vector2(10, 10)
+var makeNewApple : bool = true
+
 @export var snakeScene : PackedScene = load("res://Scenes/player/player.tscn")
 @export var score : int =  0
 @export var speed : int = 1.0
@@ -24,7 +27,7 @@ var cellSize = 10
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	newGame()
-
+	#newApple()
 	pass # Replace with function body.
 
 
@@ -38,6 +41,7 @@ func newGame() -> void:
 	mmoveDirection = up
 	canMove = true
 	generateSnake()
+	newApple()
 	
 func generateSnake() -> void:
 	oldData.clear()
@@ -59,10 +63,21 @@ func checkOutIfHitWall():
 		#end_game()
 
 func checkIfAppleEaton():
+	pass
+	
+func checkIfSelfCollide():
 	for i in range(1, len(snakeData)):
 		if snakeData[0] == snakeData[i]:
 			print("ate self")
 			#end_game()
-	
-func checkIfSelfCollide():
-	pass
+			
+func newApple():
+	while makeNewApple:
+		makeNewApple = false
+		applePos = Vector2(randi_range(0, cells - 1), randi_range(0, cells - 1))
+		for i in snakeData:
+			if applePos == i:
+				makeNewApple = true
+	if $Apple != null:
+		$Apple.position = (applePos* cellSize)+ Vector2(0, cellSize)
+		makeNewApple = true
