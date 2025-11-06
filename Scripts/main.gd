@@ -1,9 +1,9 @@
 extends Node2D
 
 
-var oldData : Array
-var snakeData : Array
-var snake : Array
+var oldData : Array = []
+var snakeData : Array = []
+var snake : Array = []
 
 var startingPos = Vector2(16, 16)
 var up = Vector2(0, -1)
@@ -22,7 +22,6 @@ var makeNewApple : bool = true
 
 @export var snakeScene : PackedScene = load("res://Scenes/player/player.tscn")
 @export var score : int =  0
-@export var speed : int = 1.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -63,7 +62,11 @@ func checkOutIfHitWall():
 		#end_game()
 
 func checkIfAppleEaton():
-	pass
+	if oldData[0] == applePos:
+		print("nom")
+		score += 1
+		addSegment(oldData[-1])
+		newApple()
 	
 func checkIfSelfCollide():
 	for i in range(1, len(snakeData)):
@@ -72,6 +75,7 @@ func checkIfSelfCollide():
 			#end_game()
 			
 func newApple():
+	print("Snake:", Main.snakeData[0], "Apple:", applePos)
 	while makeNewApple:
 		makeNewApple = false
 		applePos = Vector2(randi_range(0, cells - 1), randi_range(0, cells - 1))
@@ -80,4 +84,17 @@ func newApple():
 				makeNewApple = true
 	if $Apple != null:
 		$Apple.position = (applePos* cellSize)+ Vector2(0, cellSize)
-		makeNewApple = true
+		print($Apple.position)
+		#makeNewApple = true
+		
+	else:
+		print("apple issue") #this prints but the code works so im not touching it..
+
+
+func _on_apple_area_entered(area: Area2D) -> void:
+	newApple()
+	print("nom")
+	score += 1
+	addSegment(oldData[0])
+	newApple()
+	
