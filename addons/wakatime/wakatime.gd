@@ -26,7 +26,7 @@ var is_macos = OS.has_feature('macos')
 var is_amd64 = OS.has_feature('x86_64')
 var is_arm64 = OS.has_feature('arm64')
 
-var debug = false
+var debug = true
 
 
 func get_wakatime_build():

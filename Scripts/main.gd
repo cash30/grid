@@ -14,6 +14,7 @@ var mmoveDirection : Vector2 = up
 var canMove : bool
 
 var gameStarted = false
+var didLose : bool = false
 var cells = 32
 var cellSize = 10
 
@@ -21,7 +22,9 @@ var applePos = Vector2(10, 10)
 var makeNewApple : bool = true
 
 @export var snakeScene : PackedScene = load("res://Scenes/player/player.tscn")
-@export var score : int =  0
+@export var loseScene : PackedScene = load("res://Scenes/lose.tscn")
+@export var mainScene : PackedScene = load("res://Scenes/Main.tscn")
+@export var score : int =  50
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -41,12 +44,13 @@ func newGame() -> void:
 	canMove = true
 	generateSnake()
 	newApple()
-	
+	get_tree().change_scene_to_packed(null)
+	var didLose = false
 func generateSnake() -> void:
 	oldData.clear()
 	snakeData.clear()
 	snake.clear()
-	for i in range(30):
+	for i in range(3):
 		addSegment(startingPos + Vector2(0, i))
 
 func addSegment(pos):
@@ -56,10 +60,13 @@ func addSegment(pos):
 	add_child(segment)
 	snake.append(segment)
 	#https://www.youtube.com/watch?v=DlRP-UBR-2A working on this @4:14
+	
 func checkOutIfHitWall():
 	if snakeData[0].x < 0 or snakeData[0].x > cells - 1 or snakeData[0].y < 0 or snakeData[0].y > cells - 1:
 		print("hit wall")
-		#end_game()
+		lose()
+		didLose = true
+	#end_game()
 
 func checkIfAppleEaton():
 	if oldData[0] == applePos:
@@ -72,6 +79,7 @@ func checkIfSelfCollide():
 	for i in range(1, len(snakeData)):
 		if snakeData[0] == snakeData[i]:
 			print("ate self")
+			didLose = true
 			#end_game()
 			
 func newApple():
@@ -79,9 +87,9 @@ func newApple():
 	while makeNewApple:
 		makeNewApple = false
 		applePos = Vector2(randi_range(0, cells - 1), randi_range(0, cells - 1))
-		for i in snakeData:
-			if applePos == i:
-				makeNewApple = true
+		#for i in snakeData:
+			#if applePos == i:
+				#makeNewApple = true
 	if $Apple != null:
 		$Apple.position = (applePos* cellSize)+ Vector2(0, cellSize)
 		print($Apple.position)
@@ -90,11 +98,13 @@ func newApple():
 	else:
 		print("apple issue") #this prints but the code works so im not touching it..
 
+func lose():
+	get_tree().change_scene_to_packed(loseScene)
+	canMove = false
 
 func _on_apple_area_entered(area: Area2D) -> void:
-	newApple()
-	print("nom")
-	score += 1
-	addSegment(oldData[0])
-	newApple()
-	
+	if area.is_in_group("head"):
+		newApple()
+		print("nom")
+		score += 1
+		#addSegment(oldData[0])

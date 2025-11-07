@@ -9,7 +9,7 @@ var moveDirection = Vector2(0, 0)
 func _ready() -> void:
 	moveDirection = Main.mmoveDirection
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	moveDirection = Main.mmoveDirection
 	moveSnake()
 	#move_and_slide()
@@ -17,22 +17,22 @@ func _process(delta: float) -> void:
 func moveSnake():
 	if Main.canMove:
 		
-		if Input.is_action_pressed("up") and Main.mmoveDirection != Main.down:
+		if Input.is_action_pressed("up") and Main.mmoveDirection != Main.down and !Input.is_action_pressed("down"):
 			Main.mmoveDirection = Main.up
 			Main.canMove = false
 			if !Main.gameStarted:
 				startGame()
-		if Input.is_action_pressed("down") and Main.mmoveDirection != Main.up:
+		if Input.is_action_pressed("down") and Main.mmoveDirection != Main.up and !Input.is_action_pressed("up"):
 			Main.mmoveDirection = Main.down
 			Main.canMove = false
 			if !Main.gameStarted:
 				startGame()
-		if Input.is_action_pressed("left") and Main.mmoveDirection != Main.right:
+		if Input.is_action_pressed("left") and Main.mmoveDirection != Main.right and !Input.is_action_pressed("right"):
 			Main.mmoveDirection = Main.left
 			Main.canMove = false
 			if !Main.gameStarted:
 				startGame()
-		if Input.is_action_pressed("right") and Main.mmoveDirection != Main.left:
+		if Input.is_action_pressed("right") and Main.mmoveDirection != Main.left and !Input.is_action_pressed("left"):
 			Main.mmoveDirection = Main.right
 			Main.canMove = false
 			if !Main.gameStarted:
@@ -53,6 +53,9 @@ func _on_timer_timeout() -> void:
 		if i > 0:
 			Main.snakeData[i] = Main.oldData[i - 1]
 		Main.snake[i].position = (Main.snakeData[i] * Main.cellSize) + Vector2(0, Main.cellSize)
-	Main.checkOutIfHitWall()
-	Main.checkIfAppleEaton()
-	Main.checkIfSelfCollide()
+
+	if !Main.didLose:
+		Main.checkOutIfHitWall()
+		Main.checkIfAppleEaton()
+		Main.checkIfSelfCollide()
+		

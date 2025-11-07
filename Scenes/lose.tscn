@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnjmo3v0kwf3j"]
+[gd_scene load_steps=4 format=3 uid="uid://bnjmo3v0kwf3j"]
 
+[ext_resource type="Script" uid="uid://8ninmdpxcgce" path="res://Scripts/lose.gd" id="1_04a82"]
 [ext_resource type="Theme" uid="uid://dmqglkuslo5jw" path="res://Themes/defualt text theme.tres" id="1_ie4w5"]
+[ext_resource type="Script" uid="uid://b168pg45snwt0" path="res://Scripts/scoreCounter.gd" id="2_g0cl2"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_04a82")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -19,7 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.9893752, 0.56344277, 0.11068841, 1)
 
-[node name="Label" type="Label" parent="."]
+[node name="banner" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -35,7 +38,7 @@ text = "You died."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="."]
+[node name="score" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
@@ -51,8 +54,9 @@ theme_override_font_sizes/font_size = 50
 text = "Score: 00"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("2_g0cl2")
 
-[node name="Label3" type="Label" parent="."]
+[node name="restsrt" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.81500006
