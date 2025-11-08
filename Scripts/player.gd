@@ -15,7 +15,7 @@ func _process(_delta: float) -> void:
 	#move_and_slide()
 	
 func moveSnake():
-	if Main.canMove:
+	if Main.canMove and !Main.didLose:
 		
 		if Input.is_action_pressed("up") and Main.mmoveDirection != Main.down and !Input.is_action_pressed("down"):
 			Main.mmoveDirection = Main.up
@@ -37,26 +37,28 @@ func moveSnake():
 			Main.canMove = false
 			if !Main.gameStarted:
 				startGame()
+	elif Main.didLose:
+		hide()
 	
 	
 func startGame():
 	Main.gameStarted = true
-	#Main.newGame()
 	$Timer.start()
 
 
 func _on_timer_timeout() -> void:
-	Main.canMove = true
-	Main.oldData = [] + Main.snakeData
-	Main.snakeData[0] += moveDirection
-	for i in range(len(Main.snakeData)):
-		#move all the segments along by one
-		if i > 0:
-			Main.snakeData[i] = Main.oldData[i - 1]
-		Main.snake[i].position = (Main.snakeData[i] * Main.cellSize) + Vector2(0, Main.cellSize)
+	if Main.isSnakeGenerated:
+		Main.canMove = true
+		Main.oldData = [] + Main.snakeData
+		Main.snakeData[0] += moveDirection
+		for i in range(len(Main.snakeData)):
+			#move all the segments along by one
+			if i > 0:
+				Main.snakeData[i] = Main.oldData[i - 1]
+			Main.snake[i].position = (Main.snakeData[i] * Main.cellSize) + Vector2(0, Main.cellSize)
+
 
 	if !Main.didLose:
 		Main.checkOutIfHitWall()
 		Main.checkIfAppleEaton()
 		Main.checkIfSelfCollide()
-		

@@ -1,6 +1,7 @@
 extends Node
 
 var didStart = false
+var isSnakeGenerated = false
 
 var oldData : Array = []
 var snakeData : Array = []
@@ -33,25 +34,23 @@ var appleInst = apple.instantiate()
 func _ready() -> void:
 	newGame()
 	add_child(appleInst)
-	#newApple()
-	pass # Replace with function body.
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if didLose:
 		lose()
-	pass
 
 	
 func newGame() -> void:
+	didLose = false
 	score = 0
 	mmoveDirection = up
 	canMove = true
 	generateSnake()
 	newApple()
 	#get_tree().change_scene_to_packed(null)
-	var didLose = false
 	
 func generateSnake() -> void:
 	oldData.clear()
@@ -60,6 +59,7 @@ func generateSnake() -> void:
 	for i in range(3):
 		addSegment(startingPos + Vector2(0, i))
 		print("adding to snake :D. ", i + 1)
+	isSnakeGenerated = true
 
 func addSegment(pos):
 	snakeData.append(pos)
@@ -72,8 +72,8 @@ func addSegment(pos):
 func checkOutIfHitWall():
 	if snakeData[0].x < 0 or snakeData[0].x > cells - 1 or snakeData[0].y < 0 or snakeData[0].y > cells - 1:
 		print("hit wall")
-		didLose = true
-	#end_game()
+		#didLose = true
+		lose()
 
 func checkIfAppleEaton():
 	if snakeData[0] == applePos:
@@ -86,7 +86,7 @@ func checkIfSelfCollide():
 	for i in range(1, len(snakeData)):
 		if snakeData[0] == snakeData[i]:
 			print("ate self")
-			didLose = true
+			lose()
 			#end_game()
 			
 func newApple():
@@ -95,9 +95,7 @@ func newApple():
 		makeNewApple = false
 		applePos = Vector2(randi_range(0, cells - 1), randi_range(0, cells - 1))
 		print("apple pos: ", applePos)
-		#for i in snakeData:
-			#if applePos == i:
-				#makeNewApple = true
+
 	if appleInst:
 		appleInst.position = (applePos* cellSize)+ Vector2(0, cellSize)
 		print(appleInst.position)
@@ -107,13 +105,6 @@ func newApple():
 
 func lose():
 	print("loser!")
-	#get_tree().change_scene_to_packed(loseScene)
-	#canMove = false
+	canMove = false
+	didLose = true
 	
-#func _on_apple_area_entered(area: Area2D) -> void:
-	#if area.is_in_group("head"):
-		#newApple()
-		#print("nom")
-		#score += 1
-		#print(score)
-		##addSegment(oldData[0])

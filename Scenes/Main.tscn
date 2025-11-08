@@ -1,18 +1,47 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtlojkddgo42w"]
+[gd_scene load_steps=6 format=3 uid="uid://dtlojkddgo42w"]
 
-[ext_resource type="Texture2D" uid="uid://chqunargevfp0" path="res://Art/Snake/1/Map.png" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://bnjmo3v0kwf3j" path="res://Scenes/lose.tscn" id="3_pbw6q"]
 [ext_resource type="Texture2D" uid="uid://d0nal4ijap5tt" path="res://Art/Snake/2/map.png" id="3_rgh2o"]
 [ext_resource type="Script" uid="uid://by6kkd6164h2a" path="res://lose.gd" id="4_v1gob"]
+[ext_resource type="PackedScene" uid="uid://b7eofb3yer2of" path="res://Scenes/scoreCounter.tscn" id="5_pbw6q"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rgh2o"]
+font_color = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node"]
 
-[node name="Map" type="Sprite2D" parent="."]
-visible = false
-z_index = -1
-position = Vector2(155, 155.00002)
-scale = Vector2(10, 10)
-texture = ExtResource("1_r150o")
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = 2.0
+offset_right = -694.0
+offset_bottom = -319.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.45882353, 0.96862745, 1)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.20400001
+anchor_bottom = 1.003
+offset_right = 0.067993164
+offset_bottom = 0.018981934
+text = "WASD or 
+arrows
+to move.
+eat apples.
+dont hit
+yourself.
+dont go off
+the map."
+label_settings = SubResource("LabelSettings_rgh2o")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_trim_flags = 128
 
 [node name="Map2" type="Sprite2D" parent="."]
 z_index = -1
@@ -32,3 +61,10 @@ offset_right = -135.0
 offset_bottom = 4.0
 scale = Vector2(0.495, 0.495)
 script = ExtResource("4_v1gob")
+
+[node name="Score" parent="." instance=ExtResource("5_pbw6q")]
+offset_left = 315.0
+offset_top = 2.0
+offset_right = 352.25598
+offset_bottom = 372.0
+scale = Vector2(0.32, 0.32)

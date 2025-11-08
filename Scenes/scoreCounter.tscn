@@ -1,0 +1,88 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7eofb3yer2of"]
+
+[ext_resource type="LabelSettings" uid="uid://cyuot3j0yi5tv" path="res://Fonts/pixalated text.tres" id="1_55u6u"]
+[ext_resource type="Script" uid="uid://b168pg45snwt0" path="res://Scripts/scoreCounter.gd" id="2_0gcti"]
+[ext_resource type="Script" uid="uid://jb81t4tbcx31" path="res://Scripts/highscore.gd" id="3_rl04j"]
+
+[node name="Score" type="Control"]
+layout_mode = 3
+anchor_right = 0.347
+anchor_bottom = 1.0
+offset_right = 37.25598
+offset_bottom = 370.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.45812714, 0.96744174, 1)
+
+[node name="top blue" type="ColorRect" parent="BG"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.19600001
+offset_bottom = -0.008003235
+color = Color(0, 0.08627451, 1, 1)
+
+[node name="Score labal" type="Label" parent="BG/top blue"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "SCORE:"
+label_settings = ExtResource("1_55u6u")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="score" type="Label" parent="BG/top blue"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.95
+text = "00"
+label_settings = ExtResource("1_55u6u")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_0gcti")
+
+[node name="bottom blue" type="ColorRect" parent="BG"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 2.3620002
+anchor_right = 1.0
+anchor_bottom = 3.213
+offset_top = -1879.5161
+offset_bottom = -2567.834
+color = Color(0, 0.08627451, 1, 1)
+
+[node name="Highscore labal" type="Label" parent="BG/bottom blue"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 106
+text = "HIGHSCORE:"
+label_settings = ExtResource("1_55u6u")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="highscore" type="Label" parent="BG/bottom blue"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.95
+text = "00"
+label_settings = ExtResource("1_55u6u")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_rl04j")

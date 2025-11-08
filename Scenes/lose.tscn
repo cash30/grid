@@ -1,14 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnjmo3v0kwf3j"]
+[gd_scene load_steps=4 format=3 uid="uid://bnjmo3v0kwf3j"]
 
-[ext_resource type="FontFile" uid="uid://drepwvbab1xo3" path="res://Fonts/pixal/Minecraft.ttf" id="1_ie4w5"]
+[ext_resource type="LabelSettings" uid="uid://cyuot3j0yi5tv" path="res://Fonts/pixalated text.tres" id="1_g0cl2"]
 [ext_resource type="Texture2D" uid="uid://diwi3aerg5fls" path="res://Art/Snake/2/ded.png" id="2_g0cl2"]
 
 [sub_resource type="Theme" id="Theme_g0cl2"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_04a82"]
-font = ExtResource("1_ie4w5")
-font_size = 70
-font_color = Color(0, 0, 0, 1)
 
 [node name="Lose" type="Control"]
 layout_mode = 3
@@ -35,19 +30,19 @@ color = Color(1, 1, 1, 0.5176471)
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.33800003
+anchor_top = 0.09
 anchor_right = 1.0
-anchor_bottom = 0.74500006
+anchor_bottom = 0.497
 offset_left = 3.0
-offset_top = -161.02402
+offset_top = -0.3200035
 offset_right = 3.0
-offset_bottom = -160.76004
+offset_bottom = -0.055999756
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_g0cl2")
 text = "You lose!
  click to play again."
-label_settings = SubResource("LabelSettings_04a82")
+label_settings = ExtResource("1_g0cl2")
 horizontal_alignment = 1
 
 [node name="Ded" type="Sprite2D" parent="."]

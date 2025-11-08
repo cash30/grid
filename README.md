@@ -5,8 +5,10 @@
 	
 	
 #credits
-	I followed this tutorial: youtu.be/DlRP-UBR-2A
+	I started by following this tutorial: youtu.be/DlRP-UBR-2A
 	
 	Art by Azariah Crum + me :D
+	
+	no music today sorry ):
 	
 	

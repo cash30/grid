@@ -1,14 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://p5sjc0fmjllw"]
+[gd_scene load_steps=6 format=3 uid="uid://p5sjc0fmjllw"]
 
 [ext_resource type="Script" uid="uid://ce7fn3xle8hnu" path="res://Scripts/player.gd" id="1_eo61r"]
-[ext_resource type="Texture2D" uid="uid://biqpr5bsaw3kw" path="res://Art/Snake/1/Head.png" id="2_eo61r"]
 [ext_resource type="Texture2D" uid="uid://bn5b3o32ch5sh" path="res://Art/Snake/2/body.png" id="3_e41v5"]
 [ext_resource type="Texture2D" uid="uid://5q0s6lm2t25" path="res://Art/Snake/2/head.png" id="4_ca0mu"]
+[ext_resource type="Script" uid="uid://ciwdiphu8lr8m" path="res://Scenes/player/body.gd" id="4_e41v5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eo61r"]
-size = Vector2(8, 8)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e41v5"]
 size = Vector2(8, 8)
 
 [node name="player" type="CharacterBody2D" groups=["head"]]
@@ -22,22 +19,12 @@ position = Vector2(0, -5.9604645e-08)
 scale = Vector2(0.806575, 0.8792488)
 texture = ExtResource("4_ca0mu")
 
-[node name="Head" type="Sprite2D" parent="."]
-visible = false
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("2_eo61r")
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 
 [node name="body" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(15, 2)
+scale = Vector2(0.879, 0.879)
 texture = ExtResource("3_e41v5")
-
-[node name="Area2D" type="Area2D" parent="." groups=["head"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_e41v5")
+script = ExtResource("4_e41v5")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
