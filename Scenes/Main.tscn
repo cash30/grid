@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtlojkddgo42w"]
+[gd_scene load_steps=5 format=3 uid="uid://dtlojkddgo42w"]
 
 [ext_resource type="Texture2D" uid="uid://chqunargevfp0" path="res://Art/Snake/1/Map.png" id="1_r150o"]
+[ext_resource type="PackedScene" uid="uid://bnjmo3v0kwf3j" path="res://Scenes/lose.tscn" id="3_pbw6q"]
 [ext_resource type="Texture2D" uid="uid://d0nal4ijap5tt" path="res://Art/Snake/2/map.png" id="3_rgh2o"]
+[ext_resource type="Script" uid="uid://by6kkd6164h2a" path="res://lose.gd" id="4_v1gob"]
 
 [node name="Main" type="Node"]
 
@@ -21,3 +23,12 @@ texture = ExtResource("3_rgh2o")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(165, 165)
 zoom = Vector2(1.99, 1.99)
+
+[node name="Lose" parent="." instance=ExtResource("3_pbw6q")]
+visible = false
+offset_left = -135.00002
+offset_top = 4.0
+offset_right = -135.0
+offset_bottom = 4.0
+scale = Vector2(0.495, 0.495)
+script = ExtResource("4_v1gob")

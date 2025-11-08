@@ -1,73 +1,56 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnjmo3v0kwf3j"]
+[gd_scene load_steps=5 format=3 uid="uid://bnjmo3v0kwf3j"]
 
-[ext_resource type="Script" uid="uid://8ninmdpxcgce" path="res://Scripts/lose.gd" id="1_04a82"]
-[ext_resource type="Theme" uid="uid://dmqglkuslo5jw" path="res://Themes/defualt text theme.tres" id="1_ie4w5"]
-[ext_resource type="Script" uid="uid://b168pg45snwt0" path="res://Scripts/scoreCounter.gd" id="2_g0cl2"]
+[ext_resource type="FontFile" uid="uid://drepwvbab1xo3" path="res://Fonts/pixal/Minecraft.ttf" id="1_ie4w5"]
+[ext_resource type="Texture2D" uid="uid://diwi3aerg5fls" path="res://Art/Snake/2/ded.png" id="2_g0cl2"]
 
-[node name="Control" type="Control"]
+[sub_resource type="Theme" id="Theme_g0cl2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_04a82"]
+font = ExtResource("1_ie4w5")
+font_size = 70
+font_color = Color(0, 0, 0, 1)
+
+[node name="Lose" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_04a82")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.22700001
+anchor_right = 0.78900003
+anchor_bottom = 1.0020001
+offset_left = -0.5040283
+offset_top = 1.0
+offset_right = 0.07196045
+offset_bottom = -0.29608154
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.9893752, 0.56344277, 0.11068841, 1)
+color = Color(1, 1, 1, 0.5176471)
 
-[node name="banner" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -253.0
-offset_bottom = -106.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_ie4w5")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "You died."
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="score" type="Label" parent="."]
+[node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.5
+anchor_top = 0.33800003
 anchor_right = 1.0
-anchor_bottom = 0.596
-offset_top = -11.5
-offset_bottom = -0.20800781
+anchor_bottom = 0.74500006
+offset_left = 3.0
+offset_top = -161.02402
+offset_right = 3.0
+offset_bottom = -160.76004
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_ie4w5")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "Score: 00"
+theme = SubResource("Theme_g0cl2")
+text = "You lose!
+ click to play again."
+label_settings = SubResource("LabelSettings_04a82")
 horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("2_g0cl2")
 
-[node name="restsrt" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.81500006
-anchor_right = 1.0
-anchor_bottom = 0.938
-offset_top = -0.12005615
-offset_bottom = 0.17596436
-grow_horizontal = 2
-grow_vertical = 0
-theme = ExtResource("1_ie4w5")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-text = "Click or press space to restart"
-horizontal_alignment = 1
+[node name="Ded" type="Sprite2D" parent="."]
+position = Vector2(575, 424)
+scale = Vector2(30.635, 30.635)
+texture = ExtResource("2_g0cl2")
