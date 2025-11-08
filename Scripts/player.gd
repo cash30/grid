@@ -41,6 +41,7 @@ func moveSnake():
 	
 func startGame():
 	Main.gameStarted = true
+	#Main.newGame()
 	$Timer.start()
 
 

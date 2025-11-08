@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxvhsmvs1430u"]
+
+[ext_resource type="Texture2D" uid="uid://uxbyvqmgv165" path="res://Art/Snake/1/apple.png" id="1_v3gsn"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Apple" type="Sprite2D" parent="."]
+scale = Vector2(0.28125018, 0.31249988)
+texture = ExtResource("1_v3gsn")
