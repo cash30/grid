@@ -32,6 +32,7 @@ var appleInst = apple.instantiate()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	newGame()
+	add_child(appleInst)
 	#newApple()
 	pass # Replace with function body.
 
@@ -93,7 +94,7 @@ func newApple():
 	while makeNewApple:
 		makeNewApple = false
 		applePos = Vector2(randi_range(0, cells - 1), randi_range(0, cells - 1))
-		print(applePos)
+		print("apple pos: ", applePos)
 		#for i in snakeData:
 			#if applePos == i:
 				#makeNewApple = true

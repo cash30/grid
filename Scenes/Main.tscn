@@ -13,7 +13,6 @@ scale = Vector2(10, 10)
 texture = ExtResource("1_r150o")
 
 [node name="Map2" type="Sprite2D" parent="."]
-visible = false
 z_index = -1
 position = Vector2(155, 165)
 scale = Vector2(10, 9.999999)
